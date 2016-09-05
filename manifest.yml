@@ -1,0 +1,9 @@
+---
+applications:
+- name: openolitor-client-separation
+  memory: 64M
+  instances: 1
+  host: openolitorwwwtestseparation
+  domain: applicationcloud.io
+  path: dist/openolitor-client.zip
+  buildpack: https://github.com/cloudfoundry/staticfile-buildpack
