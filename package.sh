@@ -76,7 +76,7 @@ FILES="nginx.conf"
 
 for PROJECT in "${PROJECTS[@]}"
 do
-  ( git clone -b $BRANCH https://github.com/OpenOlitor/${PROJECT}.git .tmp/${PROJECT} )
+  ( git clone --depth 1 -b $BRANCH https://github.com/OpenOlitor/${PROJECT}.git .tmp/${PROJECT} )
 
   ( cd .tmp/${PROJECT} && npm install --cache-min 99999 && grunt build --env=$ENVIRONMENT --buildnr=$BUILD_NUMBER )
 
