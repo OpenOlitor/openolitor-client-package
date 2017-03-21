@@ -46,6 +46,14 @@ do
       OUTPUT="$2"
       shift
       ;;
+    -ncle|--no-clean)
+      NOCLEAN=true
+      shift
+      ;;
+		-nclo|--no-clone)
+      NOCLONE=true
+      shift
+      ;;
     *)
 
   ;;
@@ -57,15 +65,19 @@ done
 BRANCH=${BRANCH:-'master'}
 ENVIRONMENT=${ENVIRONMENT:-'test'}
 OUTPUT=${OUTPUT:-'openolitor-client.zip'}
+NOCLEAN=${NOCLEAN:-false}
+NOCLONE=${NOCLONE:-false}
 
 echo "Using branch ${BRANCH} and environment ${ENVIRONMENT}"
 
-echo "Cleaning up .tmp and dist"
+if [ "$NOCLEAN" = false ] ; then
+	echo "Cleaning up .tmp and dist"
 
-rm -rf .tmp
-mkdir .tmp
-rm -rf dist
-mkdir dist
+	rm -rf .tmp
+	mkdir .tmp
+	rm -rf dist
+	mkdir dist
+fi
 
 declare -a PROJECTS=($(<projects))
 
@@ -76,7 +88,9 @@ FILES="nginx.conf"
 
 for PROJECT in "${PROJECTS[@]}"
 do
-  ( git clone --depth 1 -b $BRANCH https://github.com/OpenOlitor/${PROJECT}.git .tmp/${PROJECT} )
+	if [ "$NOCLONE" = false ] ; then
+	  ( git clone --depth 1 -b $BRANCH https://github.com/OpenOlitor/${PROJECT}.git .tmp/${PROJECT} )
+  fi
 
   ( cd .tmp/${PROJECT} && npm install --cache-min 99999 && grunt build --env=$ENVIRONMENT --buildnr=$BUILD_NUMBER )
 
