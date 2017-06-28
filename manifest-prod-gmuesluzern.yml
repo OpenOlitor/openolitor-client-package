@@ -1,6 +1,6 @@
 ---
 applications:
-- name: gmuesluzern-client-soliterre
+- name: openolitor-client-gmuesluzern
   memory: 64M
   instances: 1
   host: openolitor-client-gmuesluzern
