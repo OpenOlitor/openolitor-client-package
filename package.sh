@@ -92,7 +92,7 @@ do
 	  ( git clone --depth 1 -b $BRANCH https://github.com/OpenOlitor/${PROJECT}.git .tmp/${PROJECT} )
   fi
 
-  ( cd .tmp/${PROJECT} && npm install --cache-min 99999 && grunt build --env=$ENVIRONMENT --buildnr=$BUILD_NUMBER )
+  ( cd .tmp/${PROJECT} && npm install --cache-min 99999 && npm install -g grunt-cli && grunt build --env=$ENVIRONMENT --buildnr=$BUILD_NUMBER )
 
   PROJECT_NAME=$(echo $PROJECT | cut -d'-' -f 3)
   if [ "kundenportal" = $PROJECT_NAME ]; then
@@ -121,4 +121,3 @@ NGINX_CONFIG="${NGINX_CONFIG/nginx_locations/$LOCATIONS}"
 echo "$NGINX_CONFIG" > .tmp/nginx.conf
 
 ( cd .tmp/ && echo "$FILES" | zip -r ../dist/$OUTPUT -@ )
-
