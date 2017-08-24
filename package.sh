@@ -47,11 +47,11 @@ do
       shift
       ;;
     -ncle|--no-clean)
-      NOCLEAN=true
+      NOCLEAN="true"
       shift
       ;;
 		-nclo|--no-clone)
-      NOCLONE=true
+      NOCLONE="true"
       shift
       ;;
     *)
@@ -65,12 +65,12 @@ done
 BRANCH=${BRANCH:-'master'}
 ENVIRONMENT=${ENVIRONMENT:-'test'}
 OUTPUT=${OUTPUT:-'openolitor-client.zip'}
-NOCLEAN=${NOCLEAN:-false}
-NOCLONE=${NOCLONE:-false}
+NOCLEAN=${NOCLEAN:-"false"}
+NOCLONE=${NOCLONE:-"false"}
 
 echo "Using branch ${BRANCH} and environment ${ENVIRONMENT}"
 
-if [ "$NOCLEAN" = false ] ; then
+if [ "$NOCLEAN" = "false" ] ; then
 	echo "Cleaning up .tmp and dist"
 
 	rm -rf .tmp
@@ -88,7 +88,7 @@ FILES="nginx.conf"
 
 for PROJECT in "${PROJECTS[@]}"
 do
-	if [ "$NOCLONE" = false ] ; then
+	if [ "$NOCLONE" = "false" ] ; then
 	  ( git clone --depth 1 -b $BRANCH https://github.com/OpenOlitor/${PROJECT}.git .tmp/${PROJECT} )
   fi
 
