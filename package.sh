@@ -119,3 +119,8 @@ NGINX_CONFIG="${NGINX_CONFIG/nginx_locations/$LOCATIONS}"
 echo "$NGINX_CONFIG" > .tmp/nginx.conf
 
 ( cd .tmp/ && echo "$FILES" | zip -r ../dist/$OUTPUT -@ )
+
+for PROJECT in "${PROJECTS[@]}"
+do
+  ( cd .tmp/${PROJECT} && rm dist/dist)
+done
