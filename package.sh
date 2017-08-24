@@ -47,12 +47,10 @@ do
       shift
       ;;
     -ncle|--no-clean)
-      NOCLEAN=true
-      shift
+      NOCLEAN="true"
       ;;
 		-nclo|--no-clone)
-      NOCLONE=true
-      shift
+      NOCLONE="true"
       ;;
     *)
 
@@ -65,12 +63,12 @@ done
 BRANCH=${BRANCH:-'master'}
 ENVIRONMENT=${ENVIRONMENT:-'test'}
 OUTPUT=${OUTPUT:-'openolitor-client.zip'}
-NOCLEAN=${NOCLEAN:-false}
-NOCLONE=${NOCLONE:-false}
+NOCLEAN=${NOCLEAN:-"false"}
+NOCLONE=${NOCLONE:-"false"}
 
 echo "Using branch ${BRANCH} and environment ${ENVIRONMENT}"
 
-if [ "$NOCLEAN" = false ] ; then
+if [ "$NOCLEAN" = "false" ] ; then
 	echo "Cleaning up .tmp and dist"
 
 	rm -rf .tmp
@@ -88,11 +86,11 @@ FILES="nginx.conf"
 
 for PROJECT in "${PROJECTS[@]}"
 do
-	if [ "$NOCLONE" = false ] ; then
+	if [ "$NOCLONE" = "false" ] ; then
 	  ( git clone --depth 1 -b $BRANCH https://github.com/OpenOlitor/${PROJECT}.git .tmp/${PROJECT} )
   fi
 
-  ( cd .tmp/${PROJECT} && npm install --cache-min 99999 && grunt build --env=$ENVIRONMENT --buildnr=$BUILD_NUMBER )
+  ( cd .tmp/${PROJECT} && npm install grunt && npm install --cache-min 99999 && bower install --allow-root && grunt build --env=$ENVIRONMENT --buildnr=$BUILD_NUMBER )
 
   PROJECT_NAME=$(echo $PROJECT | cut -d'-' -f 3)
   if [ "kundenportal" = $PROJECT_NAME ]; then
