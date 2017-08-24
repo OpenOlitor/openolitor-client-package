@@ -48,11 +48,9 @@ do
       ;;
     -ncle|--no-clean)
       NOCLEAN="true"
-      shift
       ;;
 		-nclo|--no-clone)
       NOCLONE="true"
-      shift
       ;;
     *)
 
