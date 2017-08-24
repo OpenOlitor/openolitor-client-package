@@ -92,7 +92,7 @@ do
 	  ( git clone --depth 1 -b $BRANCH https://github.com/OpenOlitor/${PROJECT}.git .tmp/${PROJECT} )
   fi
 
-  ( cd .tmp/${PROJECT} && npm install grunt && npm install --cache-min 99999 && bower install && grunt build --env=$ENVIRONMENT --buildnr=$BUILD_NUMBER )
+  ( cd .tmp/${PROJECT} && npm install grunt && npm install --cache-min 99999 && bower install --allow-root && grunt build --env=$ENVIRONMENT --buildnr=$BUILD_NUMBER )
 
   PROJECT_NAME=$(echo $PROJECT | cut -d'-' -f 3)
   if [ "kundenportal" = $PROJECT_NAME ]; then
