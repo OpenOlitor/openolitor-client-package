@@ -65,8 +65,9 @@ ENVIRONMENT=${ENVIRONMENT:-'test'}
 OUTPUT=${OUTPUT:-'openolitor-client.zip'}
 NOCLEAN=${NOCLEAN:-"false"}
 NOCLONE=${NOCLONE:-"false"}
+BUILD_NUMBER=${BUILD_NUMBER:-"noNBR"}
 
-echo "Using branch ${BRANCH} and environment ${ENVIRONMENT}"
+echo "Using branch ${BRANCH} and environment ${ENVIRONMENT}, output file is ${OUTPUT}"
 
 if [ "$NOCLEAN" = "false" ] ; then
 	echo "Cleaning up .tmp and dist"
