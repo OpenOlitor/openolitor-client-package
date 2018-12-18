@@ -90,8 +90,15 @@ do
 	if [ "$NOCLONE" = "false" ] ; then
 	  ( git clone --depth 1 -b $BRANCH https://github.com/OpenOlitor/${PROJECT}.git .tmp/${PROJECT} )
   fi
+  echo "------------------------------------------------------------------------------"
+  ls = $(ls)
+  pwd = $(pwd)
+  echo "-------------- -> ls ${ls}"
+  echo "-------------- -> pwd ${pwd}"
+  echo "cp ../variables.json .tmp/${PROJECT}"
+  echo "------------------------------------------------------------------------------"
   cp ../variables.json .tmp/${PROJECT}
-  ( cd .tmp/${PROJECT} && npm install grunt && npm install --cache-min 99999 && bower install --allow-root && grunt build --env=$ENVIRONMENT --buildnr=$BUILD_NUMBER )
+  ( cd .tmp/${PROJECT} && cp ../../../variables.json . && npm install grunt && npm install --cache-min 99999 && bower install --allow-root && grunt build --env=$ENVIRONMENT --buildnr=$BUILD_NUMBER )
 
   PROJECT_NAME=$(echo $PROJECT | cut -d'-' -f 3)
   if [ "kundenportal" = $PROJECT_NAME ]; then
