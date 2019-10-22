@@ -83,7 +83,8 @@ declare -a PROJECTS=($(<projects))
 NGINX_CONFIG="$(cat nginx.conf)"
 NGINX_LOCATION="$(cat nginx_location.conf)"
 LOCATIONS=""
-FILES="nginx.conf"
+FILES="nginx.conf
+mime.types"
 
 for PROJECT in "${PROJECTS[@]}"
 do
@@ -118,6 +119,7 @@ done
 NGINX_CONFIG="${NGINX_CONFIG/nginx_locations/$LOCATIONS}"
 
 echo "$NGINX_CONFIG" > .tmp/nginx.conf
+cp mime.types .tmp/
 
 ( cd .tmp/ && echo "$FILES" | zip -r ../dist/$OUTPUT -@ )
 

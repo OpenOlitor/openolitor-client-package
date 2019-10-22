@@ -3,7 +3,7 @@ applications:
 - name: openolitor-client-test
   memory: 64M
   instances: 1
-  host: openolitorwwwtest
-  domain: applicationcloud.io
+  routes:
+  - route: openolitorwwwtest.applicationcloud.io
   path: dist/openolitor-client.zip
-  buildpack: https://github.com/cloudfoundry/staticfile-buildpack
+  buildpack: https://github.com/cloudfoundry/nginx-buildpack.git
